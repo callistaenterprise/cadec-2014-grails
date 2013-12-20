@@ -1,13 +1,12 @@
 class UrlMappings {
 
 	static mappings = {
-        "/$controller/$action?/$id?(.${format})?"{
-            constraints {
-                // apply constraints here
-            }
-        }
+        //Define our own ErrorController that catches all HTTP 500 errors
+        "500"(controller: "error")
 
-        "/"(view:"/index")
-        "500"(view:'/error')
+        "/tweets"(resources: 'tweet', excludes: ['index', 'update', 'create', 'edit']) {
+        	//Nested resource
+            "/retweet"(resource: 'retweet', includes: ['save'])
+        }
 	}
 }
