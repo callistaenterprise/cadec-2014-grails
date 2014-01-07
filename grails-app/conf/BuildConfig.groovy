@@ -45,14 +45,11 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
 
-        //The below repo is needed for the events plugin M1
-       mavenRepo 'http://repo.grails.org/grails/libs-releases-local/'
     }
 
      dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.24'
-        compile 'org.grails.plugins:events:1.0.0.M1'
     }
 
     plugins {
