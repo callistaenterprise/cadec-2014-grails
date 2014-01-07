@@ -4,6 +4,7 @@ class UrlMappings {
         //Define our own ErrorController that catches all HTTP 500 errors
         "500"(controller: "error")
 
+        "/tweets"(resources: "tweet", includes=['show', 'save', 'delete'])
 
 	}
 }
