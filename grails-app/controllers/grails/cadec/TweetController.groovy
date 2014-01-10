@@ -31,6 +31,7 @@ class TweetController {
 		}
 	}
 
+	@Transactional
 	def delete(Tweet tweet) {
 		tweet.delete flush: true
 		withFormat {
