@@ -1,5 +1,7 @@
 package grails.cadec
+import grails.rest.*
 
+@Resource(uri="/tweets", formats=['json', 'xml'])
 class Tweet {
 
 	String status
