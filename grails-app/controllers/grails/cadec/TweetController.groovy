@@ -11,8 +11,9 @@ class TweetController {
 
 	static responseFormats = ['json', 'xml']
 
-	def show(Tweet tweet) {
-		respond tweet 
+	def show() {
+		def tweet = Tweet.async.get(params.id)
+		respond tweet.get() 
 	}
 
 	@Transactional
