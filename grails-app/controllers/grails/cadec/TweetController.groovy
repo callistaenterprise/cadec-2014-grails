@@ -22,10 +22,13 @@ class TweetController {
 		if(tweet.hasErrors()) {
 			respond tweet.errors
 		} else {
-			tweet.save flush: true
-
-			withFormat {
-				'*' {render status: CREATED}
+			task {
+				Tweet.async.task {
+					withTransaction { status ->
+						tweet.save flush: true
+					}
+				}
+				render status: ACCEPTED
 			}
 		}
 	}
