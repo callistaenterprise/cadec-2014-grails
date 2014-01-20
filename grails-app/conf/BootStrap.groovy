@@ -7,7 +7,6 @@ class BootStrap {
       //initiate the application with at least one Account
     	new Account(firstName: 'a', lastName: 'tweeter').save flush: true, failOnError: true
  
- 
     }
     def destroy = {
     }
