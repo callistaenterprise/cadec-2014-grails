@@ -12,8 +12,8 @@ class TweetController {
 	static responseFormats = ['json', 'xml']
 
 	def show() {
-		def tweet = Tweet.async.get(params.id)
-		respond tweet.get() 
+		def promise = Tweet.async.get( params.id )
+		respond promise.get()
 	}
 
 	@Transactional
@@ -29,7 +29,9 @@ class TweetController {
 						tweet.save flush: true
 					}
 				}
-				render status: ACCEPTED
+				withFormat {
+					'*' {render status: CREATED}
+				}
 			}
 		}
 	}
