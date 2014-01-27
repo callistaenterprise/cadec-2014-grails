@@ -13,25 +13,27 @@ class TweetController {
 	static responseFormats = ['json', 'xml']
 
     def show(Tweet tweet) {
-    	respond tweet	
-    }
+		respond tweet
+	}
 
-    @Transactional
-    def save(TweetCommand cmd) {
+	@Transactional
+	def save(TweetCommand cmd) {
+		def tweet = new Tweet(status: cmd.status, user: cmd.userId)
 
-        def tweet = new Tweet(status: cmd.status, user: cmd.userId)
-        if(tweet.hasErrors()) {
-            respond tweet.errors
-        } else {
-        	task {
-            	event('saveTweet', tweet) {
-            		log.info 'Reply was: $it'
-            	}
-            	render status: ACCEPTED
-        	}
-        }
-
-    }
+		if(tweet.hasErrors()) {
+			respond tweet.errors
+		} else {
+			task {
+				event('saveTweet', tweet) {
+					log.info "Reply was: $it"
+				}
+				withFormat {
+					'*' {render status: CREATED}
+				}
+				render
+			}
+		}
+	}
 
     def delete(Tweet tweet) {
     	tweet.delete flush:true
